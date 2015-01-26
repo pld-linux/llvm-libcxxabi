@@ -1,0 +1,68 @@
+Summary:	libc++abi - C++ standard library support from LLVM project
+Summary(pl.UTF-8):	libc++abi - wsparcie dla biblioteki standardowej C++ z projektu LLVM
+Name:		llvm-libcxxabi
+Version:	3.5.1
+Release:	1
+License:	MIT or BSD-like
+Group:		Libraries
+Source0:	http://llvm.org/releases/%{version}/libcxxabi-%{version}.src.tar.xz
+# Source0-md5:	b22c707e8d474a99865ad3c521c3d464
+URL:		http://libcxxabi.llvm.org/
+BuildRequires:	cmake >= 2.8.8
+BuildRequires:	clang >= %{version}
+BuildRequires:	llvm-devel >= %{version}
+BuildRequires:	llvm-libcxx-devel >= %{version}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%description
+libc++abi is a new implementation of low level support for a standard
+C++ library.
+
+%description -l pl.UTF-8
+libc++abi to nowa implementacja niskopoziomowego wsparcia dla
+biblioteki standardowej C++.
+
+%package devel
+Summary:	Development files for LLVM libc++abi library
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki LLVM libc++abi
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description devel
+Development files for LLVM libc++abi library.
+
+%description devel -l pl.UTF-8
+Pliki programistyczne biblioteki LLVM libc++abi.
+
+%prep
+%setup -q -n libcxxabi-%{version}.src
+
+%build
+install -d build
+cd build
+%cmake .. \
+	-DCMAKE_C_COMPILER="clang" \
+	-DCMAKE_CXX_COMPILER="clang++"
+%{__make}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install -D include/cxxabi.h $RPM_BUILD_ROOT%{_includedir}/libcxxabi/cxxabi.h
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc CREDITS.TXT LICENSE.TXT
+%attr(755,root,root) %{_libdir}/libc++abi.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libc++abi.so.1
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libc++abi.so
+%{_includedir}/libcxxabi
