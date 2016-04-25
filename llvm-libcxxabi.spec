@@ -1,13 +1,13 @@
 Summary:	libc++abi - C++ standard library support from LLVM project
 Summary(pl.UTF-8):	libc++abi - wsparcie dla biblioteki standardowej C++ z projektu LLVM
 Name:		llvm-libcxxabi
-Version:	3.7.0
+Version:	3.7.1
 Release:	1
 License:	MIT or BSD-like
 Group:		Libraries
 #Source0Download: http://llvm.org/releases/download.html
 Source0:	http://llvm.org/releases/%{version}/libcxxabi-%{version}.src.tar.xz
-# Source0-md5:	5aa769e2fca79fa5335cfae8f6258772
+# Source0-md5:	52d925afac9f97e9dcac90745255c169
 URL:		http://libcxxabi.llvm.org/
 BuildRequires:	cmake >= 2.8.8
 BuildRequires:	clang >= %{version}
