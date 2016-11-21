@@ -1,0 +1,20 @@
+--- libcxxabi-3.9.0.src/CMakeLists.txt.orig	2016-08-08 22:06:27.000000000 +0200
++++ libcxxabi-3.9.0.src/CMakeLists.txt	2016-11-21 18:38:52.075774263 +0100
+@@ -18,7 +18,7 @@
+     set(LLVM_INCLUDE_DIR ${LLVM_INCLUDE_DIR} CACHE PATH "Path to llvm/include")
+     set(LLVM_PATH ${LLVM_PATH} CACHE PATH "Path to LLVM source tree")
+     set(LLVM_MAIN_SRC_DIR ${LLVM_PATH})
+-    set(LLVM_CMAKE_PATH "${LLVM_PATH}/cmake/modules")
++    set(LLVM_CMAKE_PATH "${LLVM_PATH}/cmake/modules" CACHE PATH "Path to cmake files")
+   elseif(LLVM_CONFIG)
+     message(STATUS "Found LLVM_CONFIG as ${LLVM_CONFIG}")
+     set(CONFIG_COMMAND ${LLVM_CONFIG}
+@@ -47,7 +47,7 @@
+     set(LLVM_INCLUDE_DIR ${INCLUDE_DIR} CACHE PATH "Path to llvm/include")
+     set(LLVM_BINARY_DIR ${LLVM_OBJ_ROOT} CACHE PATH "Path to LLVM build tree")
+     set(LLVM_MAIN_SRC_DIR ${MAIN_SRC_DIR} CACHE PATH "Path to LLVM source tree")
+-    set(LLVM_CMAKE_PATH "${LLVM_BINARY_DIR}/share/llvm/cmake")
++    set(LLVM_CMAKE_PATH "${LLVM_PATH}/cmake/modules" CACHE PATH "Path to cmake files")
+     set(LLVM_LIT_PATH "${LLVM_PATH}/utils/lit/lit.py")
+   else()
+     message(FATAL_ERROR "llvm-config not found and LLVM_MAIN_SRC_DIR not defined. "
