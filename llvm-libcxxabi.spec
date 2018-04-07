@@ -1,18 +1,17 @@
 Summary:	libc++abi - C++ standard library support from LLVM project
 Summary(pl.UTF-8):	libc++abi - wsparcie dla biblioteki standardowej C++ z projektu LLVM
 Name:		llvm-libcxxabi
-Version:	3.9.1
+Version:	6.0.0
 Release:	1
 License:	MIT or BSD-like
 Group:		Libraries
-#Source0Download: http://llvm.org/releases/download.html
-Source0:	http://llvm.org/releases/%{version}/libcxxabi-%{version}.src.tar.xz
-# Source0-md5:	62fd584b38cc502172c2ffab041b5fcc
-Patch0:		%{name}-cmake-dir.patch
+#Source0Download: http://releases.llvm.org/download.html
+Source0:	http://releases.llvm.org/%{version}/libcxxabi-%{version}.src.tar.xz
+# Source0-md5:	9d06327892fc5d8acec4ef2e2821ab3d
 URL:		http://libcxxabi.llvm.org/
 BuildRequires:	cmake >= 3.4.3
 BuildRequires:	clang >= %{version}
-%ifarch arm
+%ifarch %{arm}
 BuildRequires:	libunwind-devel
 %endif
 BuildRequires:	llvm-devel >= %{version}
@@ -53,15 +52,14 @@ Statyczna biblioteka LLVM libc++abi.
 
 %prep
 %setup -q -n libcxxabi-%{version}.src
-%patch0 -p1
 
 %build
 install -d build
 cd build
 %cmake .. \
 	-DCMAKE_C_COMPILER="clang" \
-	-DCMAKE_CXX_COMPILER="clang++" \
-	-DLLVM_CMAKE_PATH=%{_libdir}/cmake/llvm
+	-DCMAKE_CXX_COMPILER="clang++"
+
 %{__make}
 
 %install
