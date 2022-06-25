@@ -1,19 +1,19 @@
 Summary:	libc++abi - C++ standard library support from LLVM project
 Summary(pl.UTF-8):	libc++abi - wsparcie dla biblioteki standardowej C++ z projektu LLVM
 Name:		llvm-libcxxabi
-Version:	12.0.1
+Version:	14.0.6
 Release:	1
 License:	MIT or BSD-like
 Group:		Libraries
 #Source0Download: https://github.com/llvm/llvm-project/releases/
 Source0:	https://github.com/llvm/llvm-project/releases/download/llvmorg-%{version}/libcxxabi-%{version}.src.tar.xz
-# Source0-md5:	3a0aa3222404e62faf9b607f2a46fefc
+# Source0-md5:	e56dac07bbcdd6582f673333a3884a2d
 #Source1Download: https://github.com/llvm/llvm-project/releases/
 Source1:	https://github.com/llvm/llvm-project/releases/download/llvmorg-%{version}/libcxx-%{version}.src.tar.xz
-# Source1-md5:	19fb22504643c4df45cb42a8f9d2f76e
+# Source1-md5:	3d5630a8dcbec623172e57fae890351b
 #Source2Download: https://github.com/llvm/llvm-project/releases/
 Source2:	https://github.com/llvm/llvm-project/releases/download/llvmorg-%{version}/llvm-%{version}.src.tar.xz
-# Source2-md5:	72a257604efa1d32ef85a37cd9c66873
+# Source2-md5:	80072c6a4be8b9adb60c6aac01f577db
 URL:		https://libcxxabi.llvm.org/
 BuildRequires:	cmake >= 3.13.4
 BuildRequires:	clang >= %{version}
@@ -70,7 +70,8 @@ install -d build
 cd build
 %cmake ../libcxxabi \
 	-DCMAKE_C_COMPILER="clang" \
-	-DCMAKE_CXX_COMPILER="clang++"
+	-DCMAKE_CXX_COMPILER="clang++" \
+	-DLIBCXXABI_LIBCXX_INCLUDES:PATH=%{_includedir}/c++/v1
 
 %{__make}
 
